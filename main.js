@@ -1,6 +1,7 @@
 import * as THREE from './three.js-master/build/three.module.js';
 
 function main() {
+    document.getElementById('popup').style.display = "none"
     const canvas = document.querySelector('#c');
     const renderer = new THREE.WebGLRenderer({ canvas });
 
@@ -90,7 +91,11 @@ function main() {
                 this.pickedObjectSavedColor = this.pickedObject.material.emissive.getHex();
                 // set its emissive color to flashing red/yellow
                 this.pickedObject.material.emissive.setHex((time * 8) % 2 > 1 ? 0xFFFF00 : 0xFF0000);
-                console.log("hovered", intersectedObjects)
+                if (document.getElementById('popup').style.display == "none") {
+                    document.getElementById('popup').style.display = "inline"
+                } else {
+                    document.getElementById('popup').style.display = "none"
+                }
             }
         }
     }
