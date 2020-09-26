@@ -1,4 +1,5 @@
 import * as THREE from './three.js-master/build/three.module.js';
+import { OrbitControls } from './three.js-master/examples/jsm/controls/OrbitControls.js';
 
 function main() {
     document.getElementById('popup').style.display = "none"
@@ -8,7 +9,7 @@ function main() {
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('white');
-
+    var loader
     const fov = 60;
     const aspect = 2;  // the canvas default
     const near = 0.1;
@@ -22,6 +23,13 @@ function main() {
     scene.add(cameraPole);
     cameraPole.add(camera);
 
+    //orbit controls
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.maxPolarAngle = Math.PI * 0.495;
+    // controls.target.set(0, 10, 0);
+    // controls.minDistance = 40.0;
+    // controls.maxDistance = 400.0;
+    controls.update();
 
     const boxWidth = 1;
     const boxHeight = 1;
@@ -59,12 +67,13 @@ function main() {
         makeInstance(geometry, 0xaa8844, 2),
     ];
 
-    //add cone
+    // add cone
     // var conegeometry = new THREE.ConeGeometry(5, 5, 12);
     // var conematerial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
     // var cone = new THREE.Mesh(conegeometry, conematerial);
     // cone.position.set(0, 10, -11)
-    // scene.add(cone);
+    // scene.add(cone); 
+
 
 
 
@@ -136,7 +145,7 @@ function main() {
         // }
     }
 
-    window.addEventListener('mousedown', onMouseDown, false);
+    window.addEventListener('click', onMouseDown, false);
 
 
 
